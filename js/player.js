@@ -408,16 +408,16 @@ function initPlayer(videoUrl) {
         art = null;
     }
 
-    // 配置HLS.js选项
+    // 配置HLS.js选项 - 优化缓冲以减少卡顿
     const hlsConfig = {
         debug: false,
         loader: adFilteringEnabled ? CustomHlsJsLoader : Hls.DefaultConfig.loader,
-        enableWorker: true,
+        enableWorker: true,  // 启用 Web Worker 以提升性能
         lowLatencyMode: false,
-        backBufferLength: 90,
-        maxBufferLength: 30,
-        maxMaxBufferLength: 60,
-        maxBufferSize: 30 * 1000 * 1000,
+        backBufferLength: 120,  // 增加后向缓冲到 120 秒
+        maxBufferLength: 60,  // 增加最大缓冲长度到 60 秒（原 30 秒）
+        maxMaxBufferLength: 120,  // 增加最大最大缓冲长度到 120 秒（原 60 秒）
+        maxBufferSize: 60 * 1000 * 1000,  // 增加缓冲区大小到 60MB（原 30MB）
         maxBufferHole: 0.5,
         fragLoadingMaxRetry: 6,
         fragLoadingMaxRetryTimeout: 64000,
@@ -432,7 +432,7 @@ function initPlayer(videoUrl) {
         abrBandWidthUpFactor: 0.7,
         abrMaxWithRealBitrate: true,
         stretchShortVideoTrack: true,
-        appendErrorMaxRetry: 5,  // 增加尝试次数
+        appendErrorMaxRetry: 5,
         liveSyncDurationCount: 3,
         liveDurationInfinity: false
     };

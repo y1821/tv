@@ -977,3 +977,75 @@ button:hover,
     background: var(--neon-cyan);
     box-shadow: 0 0 6px var(--neon-cyan);
 }
+
+/* ===============================================
+   SEARCH RESULT CARDS - LAYOUT FIX
+   =============================================== */
+
+/* 搜索卡片图片容器 - 固定宽度防止挤压文本 */
+.search-card-img-container {
+    width: 120px;
+    min-width: 120px;
+    height: 180px;
+}
+
+@media (min-width: 640px) {
+    .search-card-img-container {
+        width: 140px;
+        min-width: 140px;
+        height: 200px;
+    }
+}
+
+/* 确保卡片内的文本容器有足够空间，防止溢出 */
+.card-hover>div>.p-2 {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+/* 标题文本优化 - 防止单词在中间断裂（如"剧情片"被断成"剧情"+"片"） */
+.card-hover h3 {
+    word-break: keep-all !important;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+/* 标签容器 - 确保标签不会被挤压变形 */
+.card-hover .flex-wrap span {
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* 修复文本行高和间距，提高可读性 */
+.card-hover p {
+    line-height: 1.6;
+}
+
+/* 底部信息栏 - 确保不被压缩或变形 */
+.card-hover .border-t {
+    flex-shrink: 0;
+    min-height: 2rem;
+}
+
+/* 响应式优化 - 小屏幕调整 */
+@media (max-width: 640px) {
+    .search-card-img-container {
+        width: 100px;
+        min-width: 100px;
+        height: 150px;
+    }
+
+    .card-hover h3 {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+
+    .card-hover .flex-wrap span {
+        font-size: 0.7rem;
+        padding: 0.125rem 0.5rem;
+    }
+}

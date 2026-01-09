@@ -49,7 +49,10 @@ Sci-Fi inspired UI with neon accents and futuristic aesthetics
 
 body {
     font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: var(--void-black);
+    background-color: #050505;
+    background-image: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
     color: var(--text-primary);
     margin: 0;
     padding: 0;
@@ -987,6 +990,7 @@ button:hover,
     width: 120px;
     min-width: 120px;
     height: 180px;
+    flex-shrink: 0;
 }
 
 @media (min-width: 640px) {
@@ -997,10 +1001,18 @@ button:hover,
     }
 }
 
+/* 确保卡片本身使用 flex 布局，防止图片挤压文本 */
+.card-hover {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
 /* 确保卡片内的文本容器有足够空间，防止溢出 */
-.card-hover>div>.p-2 {
+.card-hover>div>.p-2,
+.card-hover .flex-1 {
     flex: 1;
-    min-width: 0;
+    min-width: 100px;
     overflow: hidden;
 }
 
@@ -1009,6 +1021,7 @@ button:hover,
     word-break: keep-all !important;
     overflow-wrap: break-word;
     white-space: normal;
+    font-weight: bold;
 }
 
 /* 标签容器 - 确保标签不会被挤压变形 */
